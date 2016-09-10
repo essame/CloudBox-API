@@ -1,0 +1,27 @@
+{
+  "name": "duriana-cloudbox",
+  "version": "0.4.0",
+  "homepage": "https://github.com/AlpsVentures/Duriana-Cloudbox",
+  "authors": [
+    "Duriana"
+  ],
+  "main": "res/Categories.json",
+  "description": "GBCloudBox is a framework for over-the-air, asynchronous, in-the-background, resource syncing between iOS/Mac OS X apps and a server.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "config",
+    "lib",
+    ".gitignore",
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE",
+    "Procfile",
+    "README.md",
+    "config.ru"
+  ]
+}
