@@ -1,0 +1,7 @@
+RESOURCES_FILES:
+  options:
+    v: 1
+    path: 'resources/options.json'
+  currencies:
+    v: 2
+    path: 'resources/currencies.json'
