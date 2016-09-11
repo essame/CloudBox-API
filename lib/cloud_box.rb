@@ -1,5 +1,5 @@
 # cloud_box.rb
-# DurianaCloudBox
+# CloudBox
 
 # Created by Luka Mirosevic on 20/03/2013.
 # Copyright (c) 2013 Goonbee. All rights reserved.
@@ -24,26 +24,18 @@ require 'eventmachine'
 require 'json/minify'
 require './lib/version.rb'
 require './lib/abtesting.rb'
+require './lib/cloud_box_helpers.rb'
 
 ############################################### CONFIG ###############################################
 
-RESOURCES_META_PATH = "GBCloudBoxResourcesMeta"
-RESOURCES_DATA_PATH = "GBCloudBoxResourcesData"
-
-MANIFEST = RESOURCES_MANIFEST.map do |fn, data|
-  content = JSON.minify(File.read(data[:path]))
-  { fn => { content: content,
-            length: content.length.to_s,
-            hash: Digest::MD5.hexdigest(content) } }
-end.reduce(:merge)
-
 class CloudBox < Sinatra::Base
+  include CloudBoxHelpers
   # register Sinatra::Async
 
   configure :development do
     USE_SSL = false
     set :bind, '0.0.0.0'
-    $stdout.sync = true
+    $stdout.sync = false
   end
 
   configure :production do
@@ -55,32 +47,6 @@ class CloudBox < Sinatra::Base
 
   configure :staging do
     USE_SSL = true
-
-    #New relic
-    # require 'newrelic_rpm'
-  end
-
-  ############################################### HELPERS ###############################################
-
-  def public_url_for_resource(resource)
-    protocol = USE_SSL ? "https" : "http"
-    "#{protocol}://#{request.host_with_port}/#{RESOURCES_DATA_PATH}/#{resource}"
-  end
-
-  def local_path_for_local_resource(resource)
-    if RESOURCES_MANIFEST.has_key?(resource)
-      RESOURCES_MANIFEST[resource][:path]
-    else
-      nil
-    end
-  end
-
-  def version_for_local_resource(resource)
-    if RESOURCES_MANIFEST.has_key?(resource)
-      RESOURCES_MANIFEST[resource][:v]
-    else
-      nil
-    end
   end
 
   ############################################### Version #######################################################
@@ -103,10 +69,9 @@ class CloudBox < Sinatra::Base
     body(JSON.generate(ABTESTING))
   end
 
-  ############################################### DurianaCLOUDBOX META ###############################################
+  ############################################### CLOUDBOX META ###############################################
 
   get "/#{RESOURCES_META_PATH}/:resource" do
-    # debugger
     resource = params[:resource].to_sym
     if RESOURCES_MANIFEST.include?(resource)
       #get the resource info
@@ -115,7 +80,7 @@ class CloudBox < Sinatra::Base
       if resource_info.has_key?(:url)
         url = resource_info[:url]
       elsif resource_info.has_key?(:path)
-        url = public_url_for_resource(resource)
+        url = public_url_for_resource(resource_info)
       else
         ahalt 404
       end
@@ -137,16 +102,16 @@ class CloudBox < Sinatra::Base
   end
 
   ############################################### LOCAL RESOURCES SERVER ###############################################
-
+  # TODO remove it!
   get "/resources/:resource" do
-    resource = params[:resource].to_sym
+    resource = params[:resource].split('.').first.to_sym
     data = MANIFEST[resource]
     if data
       headers(
         'Resource-Version'          => version_for_local_resource(resource).to_s,
         'Content-Length'            => data[:length],
         'Content-Type'              => 'application/octet-stream',
-        'Content-Disposition'       => "attachment; filename=\"#{resource}\"",
+        'Content-Disposition'       => "attachment; filename=\"#{params[:resource]}\"",
         'Content-Transfer-Encoding' => 'binary'
       )
 
@@ -157,7 +122,7 @@ class CloudBox < Sinatra::Base
   end
 
   get "/#{RESOURCES_DATA_PATH}/:resource" do
-    resource = params[:resource].to_sym
+    resource = params[:resource].split('.').first.to_sym
 
     #get path
     path = local_path_for_local_resource(resource)
