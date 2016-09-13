@@ -51,8 +51,8 @@ Implementing your own server
 You can always create your own implementation of the server, the protocol is very simple... you need to implement a `meta` GET url which returns a JSON string like this:
 ```json
 {
-	"v": "3",
-	"url": "http://www.my-company.com/path/to/the/actual/resource.zip"
+  "v": "3",
+  "url": "http://www.my-company.com/path/to/the/actual/resource.zip"
 }
 ```
 
@@ -71,7 +71,7 @@ Environtments
 	ENV['ANDROID_LATEST_VERSION'] = '2.2.6'
 	ENV['ANDROID_UPGRADE_TITLE'] = '2.2.6'
 	ENV['ANDROID_UPGRADE_MESSAGE'] = '2.2.6'
-	
+
 	ENV['IOS_MINIMUM_VERSION'] = '2.2.0'
 	ENV['IOS_LATEST_VERSION'] = '2.2.6'
 	ENV['IOS_UPGRADE_TITLE'] = '2.2.6'
