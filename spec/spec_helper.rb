@@ -9,6 +9,7 @@ ENV['RACK_ENV'] = 'test'
 root = Pathname.new(File.expand_path('../..', __FILE__))
 require root.join('config/environment.rb')
 require root.join('lib/cloud_box.rb')
+require root.join('lib/cloud_box_commit.rb')
 require File.expand_path '../helpers.rb', __FILE__
 
 module RSpecMixin

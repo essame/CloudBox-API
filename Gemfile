@@ -20,5 +20,4 @@ group :development, :test do
   gem 'rack-test', require: 'rack/test'
   gem 'test-unit'
   gem 'byebug'
-  gem 'rspec-rainbow'
 end

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require './lib/cloud_box_commit.rb'
+
+# To use it
+# add chmod for this file
+# $chmod +x commit_changes
+# run the file by
+# $./commit_changes
+
+CloudBoxCommit.commit_resources_files

@@ -17,13 +17,6 @@ ABTESTING = {
     iosRunning: ENV['ABTESTING_IOS_RUNNING'] || DEFAULT_ABTESTING_IOS_RUNNING
 }
 
-MANIFEST = RESOURCES_MANIFEST.map do |fn, data|
-  content = JSON.minify(File.read(data[:path]))
-  { fn => { content: content,
-            length: content.length.to_s,
-            hash: Digest::MD5.hexdigest(content) } }
-end.reduce(:merge)
-
 ANDROID = {
   mv: ENV['ANDROID_MINIMUM_VERSION'] || DEFAULT_ANDROID_MV,
   lv: ENV['ANDROID_LATEST_VERSION'] || DEFAULT_ANDROID_LV,
