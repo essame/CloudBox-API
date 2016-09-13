@@ -31,14 +31,14 @@ describe 'cloud box' do
   end
 
   context 'meta resource' do
-    let(:resource_meta_data) do { v: 1,
-                                 url: 'http://example.org/GBCloudBoxResourcesData/options.json',
-                                 md5: 'dba71e35e9c33d387d90510259ce05a5' }
+    let(:resource_meta_data) do { v: 2,
+                                 url: 'http://example.org/GBCloudBoxResourcesData/currencies.json',
+                                 md5: '3d58ccdfe3db28ae6ca03eead42924be' }
     end
-    let(:resource_file_name) { 'options.json' }
+    let(:resource_file_name) { 'currencies.json' }
 
     it 'meta resource' do
-      get 'GBCloudBoxResourcesMeta/options'
+      get 'GBCloudBoxResourcesMeta/currencies'
       expect(parsed_response_symbolize).to eq(resource_meta_data)
     end
 
@@ -48,9 +48,9 @@ describe 'cloud box' do
     end
 
     it 'attachment meta resource' do
-      get 'resources/options.json'
+      get 'resources/currencies.json'
       expect(last_response['Content-Type']).to eq('application/octet-stream')
-      expect(last_response['Content-Disposition']).to eq('attachment; filename="options.json"')
+      expect(last_response['Content-Disposition']).to eq('attachment; filename="currencies.json"')
     end
 
     it 'resource not found' do
@@ -59,9 +59,9 @@ describe 'cloud box' do
     end
 
     it 'attachment data resource file' do
-      get 'GBCloudBoxResourcesData/options.json'
+      get 'GBCloudBoxResourcesData/currencies.json'
       expect(last_response['Content-Type']).to eq('application/octet-stream')
-      expect(last_response['Content-Disposition']).to eq('attachment; filename="options.json"')
+      expect(last_response['Content-Disposition']).to eq('attachment; filename="currencies.json"')
     end
 
     it 'resource not found' do

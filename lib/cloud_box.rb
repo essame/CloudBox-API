@@ -15,18 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-require 'sinatra'
-require 'sinatra/async'
-require 'json'
-require 'rainbows'
-require 'eventmachine'
-require 'json/minify'
-require './lib/version.rb'
-require './lib/abtesting.rb'
 require './lib/cloud_box_helpers.rb'
-
-############################################### CONFIG ###############################################
 
 class CloudBox < Sinatra::Base
   include CloudBoxHelpers
@@ -41,7 +30,7 @@ class CloudBox < Sinatra::Base
   configure :production do
     USE_SSL = true
 
-    #New relic
+    # => New relic
     require 'newrelic_rpm'
   end
 

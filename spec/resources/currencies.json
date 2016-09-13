@@ -3,8 +3,7 @@
     "options": [
       "USD",
       "MYR",
-      "SGD",
-      "other"
+      "SGD"
     ]
   }
 }

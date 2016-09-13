@@ -6,6 +6,24 @@ DEFAULT_API_SM = 'false'
 DEFAULT_UPGRADE_TITLE = "Upgrade your App"
 DEFAULT_UPGRADE_MESSAGE = "<b>We recently launched a new feature</b>"
 
+RESOURCES_META_PATH = "GBCloudBoxResourcesMeta"
+RESOURCES_DATA_PATH = "GBCloudBoxResourcesData"
+
+DEFAULT_ABTESTING_ANDROID_RUNNING = 'false'
+DEFAULT_ABTESTING_IOS_RUNNING = 'false'
+
+ABTESTING = {
+    androidRunning: ENV['ABTESTING_ANDROID_RUNNING'] || DEFAULT_ABTESTING_ANDROID_RUNNING,
+    iosRunning: ENV['ABTESTING_IOS_RUNNING'] || DEFAULT_ABTESTING_IOS_RUNNING
+}
+
+MANIFEST = RESOURCES_MANIFEST.map do |fn, data|
+  content = JSON.minify(File.read(data[:path]))
+  { fn => { content: content,
+            length: content.length.to_s,
+            hash: Digest::MD5.hexdigest(content) } }
+end.reduce(:merge)
+
 ANDROID = {
   mv: ENV['ANDROID_MINIMUM_VERSION'] || DEFAULT_ANDROID_MV,
   lv: ENV['ANDROID_LATEST_VERSION'] || DEFAULT_ANDROID_LV,

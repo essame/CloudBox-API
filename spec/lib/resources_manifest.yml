@@ -1,0 +1,10 @@
+---
+RESOURCES_FILES:
+  options:
+    v: 1
+    path: spec/resources/options.json
+    hash: 2b6233512beedcdc2f7ff47d471224ab
+  currencies:
+    v: 2
+    path: spec/resources/currencies.json
+    hash: 39c962d92fe0da209588299761a74446
