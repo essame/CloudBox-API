@@ -1,6 +1,6 @@
 require 'spec_helper.rb'
 
-describe 'cloud box' do
+describe 'cloud box', :type => :request do
   let(:android_version) do { mv: ENV['ANDROID_MINIMUM_VERSION'],
                              lv: ENV['ANDROID_LATEST_VERSION'],
                              title: ENV['ANDROID_UPGRADE_TITLE'],
@@ -44,7 +44,7 @@ describe 'cloud box' do
 
     it 'resource not found' do
       get 'GBCloudBoxResourcesMeta/another_resource.json'
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(404)
     end
 
     it 'attachment meta resource' do
@@ -55,7 +55,7 @@ describe 'cloud box' do
 
     it 'resource not found' do
       get 'resources/another_resource.json'
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(404)
     end
 
     it 'attachment data resource file' do
@@ -66,7 +66,7 @@ describe 'cloud box' do
 
     it 'resource not found' do
       get 'GBCloudBoxResourcesData/another_resource.json'
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(404)
     end
   end
 

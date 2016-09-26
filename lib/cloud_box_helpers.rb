@@ -24,7 +24,7 @@ module CloudBoxHelpers
     if RESOURCES_MANIFEST.has_key?(resource)
       RESOURCES_MANIFEST[resource][:path]
     else
-      nil
+      ''
     end
   end
 

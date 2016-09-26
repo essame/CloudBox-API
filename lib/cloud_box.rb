@@ -19,7 +19,9 @@ require './lib/cloud_box_helpers.rb'
 
 class CloudBox < Sinatra::Base
   include CloudBoxHelpers
-  # register Sinatra::Async
+  register Sinatra::Async
+
+  USE_SSL = false
 
   configure :development do
     USE_SSL = false

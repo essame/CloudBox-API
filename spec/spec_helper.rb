@@ -1,3 +1,4 @@
+ENV['RACK_ENV'] = 'test'
 require 'test/unit'
 require 'rack/test'
 require 'rspec'
@@ -5,7 +6,6 @@ require 'sinatra/async'
 require 'sinatra/async/test'
 require 'byebug'
 
-ENV['RACK_ENV'] = 'test'
 root = Pathname.new(File.expand_path('../..', __FILE__))
 require root.join('config/environment.rb')
 require root.join('lib/cloud_box.rb')

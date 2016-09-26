@@ -4,6 +4,6 @@ module Helpers
   end
 
   def parsed_response_symbolize
-    JSON.parse(last_response.body).deep_symbolize_keys
+    JSON.parse(last_response.body).deep_symbolize_keys unless last_response.body.empty?
   end
 end
