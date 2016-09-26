@@ -63,7 +63,7 @@ class CloudBox < Sinatra::Base
   ############################################### CLOUDBOX META ###############################################
 
   get "/#{RESOURCES_META_PATH}/:resource" do
-    resource = params[:resource].to_sym
+    resource = params[:resource].split('.').first.to_sym
     if RESOURCES_MANIFEST.include?(resource)
       #get the resource info
       resource_info = RESOURCES_MANIFEST[resource]
