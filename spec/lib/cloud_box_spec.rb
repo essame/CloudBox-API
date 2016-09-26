@@ -42,6 +42,11 @@ describe 'cloud box', :type => :request do
       expect(parsed_response_symbolize).to eq(resource_meta_data)
     end
 
+    it 'meta resource with extention' do
+      get 'GBCloudBoxResourcesMeta/currencies.json'
+      expect(parsed_response_symbolize).to eq(resource_meta_data)
+    end
+
     it 'resource not found' do
       get 'GBCloudBoxResourcesMeta/another_resource.json'
       expect(last_response.status).to eq(404)
