@@ -6,8 +6,8 @@ DEFAULT_API_SM = 'false'
 DEFAULT_UPGRADE_TITLE = "Upgrade your App"
 DEFAULT_UPGRADE_MESSAGE = "<b>We recently launched a new feature</b>"
 
-RESOURCES_META_PATH = "GBCloudBoxResourcesMeta"
-RESOURCES_DATA_PATH = "GBCloudBoxResourcesData"
+RESOURCES_META_PATH = "CloudBoxAPIResourcesMeta"
+RESOURCES_DATA_PATH = "CloudBoxAPIResourcesData"
 
 DEFAULT_ABTESTING_ANDROID_RUNNING = 'false'
 DEFAULT_ABTESTING_IOS_RUNNING = 'false'

@@ -32,23 +32,23 @@ describe 'cloud box', :type => :request do
 
   context 'meta resource' do
     let(:resource_meta_data) do { v: 2,
-                                 url: 'http://example.org/GBCloudBoxResourcesData/currencies.json',
+                                 url: 'http://example.org/CloudBoxAPIResourcesData/currencies.json',
                                  md5: '3d58ccdfe3db28ae6ca03eead42924be' }
     end
     let(:resource_file_name) { 'currencies.json' }
 
     it 'meta resource' do
-      get 'GBCloudBoxResourcesMeta/currencies'
+      get 'CloudBoxAPIResourcesMeta/currencies'
       expect(parsed_response_symbolize).to eq(resource_meta_data)
     end
 
     it 'meta resource with extention' do
-      get 'GBCloudBoxResourcesMeta/currencies.json'
+      get 'CloudBoxAPIResourcesMeta/currencies.json'
       expect(parsed_response_symbolize).to eq(resource_meta_data)
     end
 
     it 'resource not found' do
-      get 'GBCloudBoxResourcesMeta/another_resource.json'
+      get 'CloudBoxAPIResourcesMeta/another_resource.json'
       expect(last_response.status).to eq(404)
     end
 
@@ -64,13 +64,13 @@ describe 'cloud box', :type => :request do
     end
 
     it 'attachment data resource file' do
-      get 'GBCloudBoxResourcesData/currencies.json'
+      get 'CloudBoxAPIResourcesData/currencies.json'
       expect(last_response['Content-Type']).to eq('application/octet-stream')
       expect(last_response['Content-Disposition']).to eq('attachment; filename="currencies.json"')
     end
 
     it 'resource not found' do
-      get 'GBCloudBoxResourcesData/another_resource.json'
+      get 'CloudBoxAPIResourcesData/another_resource.json'
       expect(last_response.status).to eq(404)
     end
   end
