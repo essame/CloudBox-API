@@ -19,6 +19,7 @@ require './lib/cloud_box_helpers.rb'
 
 class CloudBox < Sinatra::Base
   include CloudBoxHelpers
+  # => TODO use Sinatra::Async
   register Sinatra::Async
 
   USE_SSL = false
@@ -31,33 +32,16 @@ class CloudBox < Sinatra::Base
 
   configure :production do
     USE_SSL = true
-
-    # => New relic
-    require 'newrelic_rpm'
   end
 
   configure :staging do
     USE_SSL = true
   end
 
-  ############################################### Version #######################################################
-
-  get "/version" do
-    headers 'Content-Type' => "application/json"
-    body(JSON.generate(VERSION))
-  end
-
   get '/manifest' do
     headers 'Content-Type' => "application/json"
     @manifest ||= MANIFEST.map {|k, v| [k, v[:hash]]}.to_h
     body(JSON.generate(@manifest))
-  end
-
-  ############################################### A-B Testing #######################################################
-
-  get "/abtesting" do
-    headers 'Content-Type' => "application/json"
-    body(JSON.generate(ABTESTING))
   end
 
   ############################################### CLOUDBOX META ###############################################
@@ -93,24 +77,6 @@ class CloudBox < Sinatra::Base
   end
 
   ############################################### LOCAL RESOURCES SERVER ###############################################
-  # TODO remove it!
-  get "/resources/:resource" do
-    resource = params[:resource].split('.').first.to_sym
-    data = MANIFEST[resource]
-    if data
-      headers(
-        'Resource-Version'          => version_for_local_resource(resource).to_s,
-        'Content-Length'            => data[:length],
-        'Content-Type'              => 'application/octet-stream',
-        'Content-Disposition'       => "attachment; filename=\"#{params[:resource]}\"",
-        'Content-Transfer-Encoding' => 'binary'
-      )
-
-      body data[:content]
-    else
-      ahalt 404
-    end
-  end
 
   get "/#{RESOURCES_DATA_PATH}/:resource" do
     resource = params[:resource].split('.').first.to_sym

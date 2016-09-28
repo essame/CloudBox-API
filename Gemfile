@@ -11,10 +11,6 @@ gem 'json-minify'
 gem 'foreman'
 gem 'hashr'
 
-group :production do
-  gem 'newrelic_rpm'
-end
-
 group :development, :test do
   gem 'rspec'
   gem 'rack-test', require: 'rack/test'

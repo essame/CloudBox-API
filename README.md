@@ -10,7 +10,8 @@ Dependency management using bundler.  Includes NewRelic monitoring.
 CloudBox Clients
 ------------
 Android: https://github.com/duriana/Duriana-Cloudbox-Android
-Ios: https://github.com/lmirosevic/GBCloudBoxClient
+
+Ios: https://github.com/duriana/CloudBox-iOS
 
 
 Usage
