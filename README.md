@@ -7,6 +7,12 @@ This is a server implementation for the CloudBoxAPI, and is configured for 1 cli
 
 Dependency management using bundler.  Includes NewRelic monitoring.
 
+CloudBox Clients
+------------
+Android: https://github.com/duriana/Duriana-Cloudbox-Android
+Ios: https://github.com/lmirosevic/GBCloudBoxClient
+
+
 Usage
 ------------
 
