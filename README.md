@@ -1,4 +1,4 @@
-Modified version of CloudBoxAPI Server (Ruby)
+CloudBoxAPI Server (Ruby)
 ============
 
 CloudBoxAPI is a framework for over-the-air, asynchronous, in-the-background, resource syncing between iOS/Mac OS X apps and a server. Let's say your app depends on a javascript resource file called `MyResource.js`, but you want to be able to change it often without resubmitting your entire app to the App Store. CloudBoxAPI allows you to ship a bundled version of the resource inside your app, publish and distribute your app, and then once the app is out in the wild push updated versions of your resource to the cloud and have your apps in the wild automatically sync the resource as soon as the new one becomes available.
@@ -11,8 +11,7 @@ CloudBox Clients
 ------------
 Android: https://github.com/duriana/Duriana-Cloudbox-Android
 
-Ios: https://github.com/duriana/CloudBox-iOS
-
+iOS: https://github.com/duriana/CloudBox-iOS
 
 Usage
 ------------
@@ -90,31 +89,9 @@ The path to this JSON can be set in the client library, it defaults to `/CloudBo
 
 That basically tells the client what the latest version is and where to find it. Then just make sure that the resouce (in this case `resource.zip`) is actually available at the url you claim it's at. The client will check the meta path to see if there's a newer version out, and if there is it will get it from the url your server specifies. You can serve the actual file from something like Amazon S3, a CDN, or your own server.
 
-iOS & Mac OS X Client (Objective-C)
-------------
-
-Environtments
-------------
-
-in .env.development, .env.production ...
-
-	ENV['ANDROID_MINIMUM_VERSION'] = '2.2.0'
-	ENV['ANDROID_LATEST_VERSION'] = '2.2.6'
-	ENV['ANDROID_UPGRADE_TITLE'] = '2.2.6'
-	ENV['ANDROID_UPGRADE_MESSAGE'] = '2.2.6'
-
-	ENV['IOS_MINIMUM_VERSION'] = '2.2.0'
-	ENV['IOS_LATEST_VERSION'] = '2.2.6'
-	ENV['IOS_UPGRADE_TITLE'] = '2.2.6'
-	ENV['IOS_UPGRADE_MESSAGE'] = '2.2.6'
-
-	ENV['ABTESTING_ANDROID_RUNNING'] = 'false'
-	ENV['ABTESTING_IOS_RUNNING'] = 'false'
-
 Updating resources
 ------------
 - increase version in bower file
-
 
 TODO & issues:
 ------------
